@@ -14,7 +14,9 @@ export function getHash() {
     return window.location.hash.slice(1);
 }
 
-//确保 有斜线/
+/**
+ * 确保 有斜线
+ */
 function ensureSlash() {
     if (window.location.hash) {
         return
@@ -29,24 +31,32 @@ export default class HashHistory extends History {
         ensureSlash();
     }
 
-    /**获取当前hash值*/
+    /**
+     * 获取当前hash值
+    */
     getCurrentLocation() {
         return getHash();
     }
 
-    /**监听hash值的变化 */
+    /**
+     * 监听hash值的变化
+     */
     setupListener() {
         window.addEventListener('hashchange', () => {
             this.transitionTo(getCurrentLocation());
         })
     }
 
-    /**push方法 */
+    /**
+     * push方法 
+     */
     push(location) {
         window.location.hash = location
     }
 
-    /**replace方法 */
+    /**
+     * replace方法 
+     */
     replace(location) {
         window.location.hash = location
     }

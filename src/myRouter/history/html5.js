@@ -10,14 +10,18 @@ export default class Html5History extends History {
         super(router)
     }
 
-    /**监听hash值的变化 */
+    /**
+     * 监听hash值的变化 
+     */
     setupListener() {
         window.addEventListener('popstate', () => {
             this.transitionTo(getCurrentLocation());
         })
     }
 
-    /**push方法 */
+    /**
+     * push方法 
+     */
     push(location) {
         this.transitionTo(location,()=>{
             history.pushState({key:Date.now()}, '', location)
@@ -25,14 +29,18 @@ export default class Html5History extends History {
         
     }
 
-    /**replace方法 */
+    /**
+     * replace方法 
+     */
     replace(location) {
         this.transitionTo(location,()=>{
             history.replaceState({key:Date.now()}, '', location)
         })
     }
 
-    /**获取当前浏览器的地址 */
+    /**
+     * 获取当前浏览器的地址 
+     */
     getCurrentLocation (){
         return getLocation()
     }

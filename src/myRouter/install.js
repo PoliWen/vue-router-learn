@@ -25,14 +25,18 @@ export default function install(Vue) {
         }
     })
 
-    /**在原型上定义一个$router属性 */
+    /**
+     * 在原型上定义一个$router属性 
+     */
     Object.defineProperty(Vue.prototype, '$router', {
         get() {
             return this._routerRoot._router
         }
     })
 
-    /**在原型上定义一个$route属性 */
+    /**
+     * 在原型上定义一个$route属性 
+     */
     Object.defineProperty(Vue.prototype, '$route', {
         get() {
             return this._routerRoot._route

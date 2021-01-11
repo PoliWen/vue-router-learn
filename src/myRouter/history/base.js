@@ -3,6 +3,7 @@
  * @author: wenxiaoli<10800>
  * @create: 2021-01-08 12:44:20
  */
+
 import {
     getHash
 } from './hash'
@@ -25,7 +26,9 @@ export default class History {
     setupListeners(){}
 
 
-    //跳转的核心逻辑，location代表跳转目的地，onComplete跳转成功之后的回调函数
+    /**
+     * 跳转的核心逻辑，location代表跳转目的地，onComplete跳转成功之后的回调函数
+     */
     transitionTo(location, onComplete) {
         let route = this.router.match(location); //用当前路径找出,对应的路由记录
 

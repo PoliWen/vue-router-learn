@@ -11,7 +11,6 @@ export default function createRouterMap(routes) {
         addRouteRecord(item, pathMap)
     })
 
-    console.log(pathMap);
     return {
         pathMap
     }

@@ -14,12 +14,16 @@ export default function createMatcher(routes) {
         pathMap
     } = createRouterMap(routes);
 
-    //用来匹配的方法
+    /** 
+     * 用来匹配的方法 
+     */
     function match(location) {
         return pathMap[location]
     }
 
-    //动态添加路由的方法
+    /** 
+     * 动态添加路由的方法 
+     */
     function addRoutes() {
 
     }
