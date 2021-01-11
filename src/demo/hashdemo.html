@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js路由跳转之hash原理</title>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <a href="#/">首页</a>
+        </li>
+        <li>
+            <a href='#/news'>新闻</a>
+        </li>
+    </ul>
+    <div id="router-view">
+
+    </div>
+</body>
+<script type="text/javascript">
+    let routerView = document.getElementById('router-view');
+
+    window.addEventListener('DOMContentLoaded', function () {
+        routerView.innerHTML = `<h3>首页</h3>`
+    })
+
+    //hash值改变，重新渲染视图
+    window.addEventListener('hashchange', function (e) {
+        let hash = location.hash.slice(1)
+        console.log('老url', e.oldURL)
+        console.log('新url', e.newURL)
+
+        switch (hash) {
+            case '/':
+                routerView.innerHTML = `<h3>首页</h3>`
+                break
+            case '/news':
+                routerView.innerHTML = `<h3>新闻</h3>`
+        }
+    })
+</script>
+
+</html>

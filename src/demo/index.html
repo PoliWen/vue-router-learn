@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js路由跳转之history的实现原理</title>
+</head>
+
+<body>
+
+    <button onclick="history.back(-1)">后退</button>
+    <button onclick="history.go(1)">前进</button>
+    <ul id='router-link'>
+        <li>
+            <a href='/' replace='true'>首页</a>
+        </li>
+        <li>
+            <a href='/news'>新闻</a>
+        </li>
+    </ul>
+    <div id="router-view"></div>
+</body>
+<script type="text/javascript">
+    //采用history的方法来改变url
+    //History.back();History.forward(),History.go(),History.pushState(),History.replaceState()
+    let routerView = document.getElementById('router-view');
+
+    //渲染视图
+    function renderView(to) {
+        console.log('旧的url', location.pathname);
+        console.log('新的url', to);
+        switch (to) {
+            case '/':
+                routerView.innerHTML = `<h3>首页</h3>`
+                break
+            case '/news':
+                routerView.innerHTML = `<h3>新闻</h3>`
+        }
+    }
+
+    let linkDom = document.getElementById('router-link');
+    let routerLink = linkDom.getElementsByTagName('a');
+
+    //点击a标签添加事件
+    for (let i = 0; i < routerLink.length; i++) {
+        routerLink[i].onclick = function (e) {
+            e.preventDefault()
+            let target = e.target
+            let currentPath = target.getAttribute('href')
+            let replace = target.getAttribute('replace')
+
+            let state = {
+                name: currentPath
+            }
+            renderView(currentPath)
+
+            if (replace) {
+                console.log('执行replaceState方法')
+                history.replaceState(state, '', currentPath)
+            } else {
+                history.pushState(state, '', currentPath)
+            }
+            console.log(history)
+        }
+    }
+
+    //获取当前地址栏的路由地址
+    function getCurrentLocation() {
+        console.log(location.pathname)
+        return location.pathname
+    }
+
+    //页面第一次加载默认渲染首页
+    window.addEventListener('DOMContentLoaded', function () {
+        renderView(getCurrentLocation())
+    })
+
+    //hash值改变，重新渲染视图
+    window.addEventListener('popstate', function (e) {
+        renderView(getCurrentLocation())
+    })
+</script>
+
+</html>
